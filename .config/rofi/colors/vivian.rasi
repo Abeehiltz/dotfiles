@@ -1,0 +1,16 @@
+/**
+ *
+ * Author : Abeehiltz
+ * Github : @abeehiltz
+ * 
+ * Colors
+ **/
+
+* {
+    background:     #1E1A2EFF;
+    background-alt: #2A2340FF;
+    foreground:     #E0D9F8FF;
+    selected:       #8D74E6FF;
+    active:         #704FBAFF;
+    urgent:         #E14C8CFF;
+}
