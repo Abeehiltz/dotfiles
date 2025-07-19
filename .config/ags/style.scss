@@ -1,0 +1,43 @@
+// https://gitlab.gnome.org/GNOME/gtk/-/blob/gtk-3-24/gtk/theme/Adwaita/_colors-public.scss
+@use "/home/abee/.cache/wal/colors.scss" as *;
+
+window {
+  all: unset
+}
+
+button {
+  background-image: none;
+}
+
+window.Bar {
+    background-color: transparent;
+    color: $foreground;
+    font-weight: bold;
+
+    >centerbox {
+        background: $background;
+        border-radius: 10px;
+        margin: 8px;
+    }
+
+    button {
+        border-radius: 8px;
+        margin: 2px;
+    }
+}
+.barClock button {
+  background-image: none;
+  background-color: $color0;
+  border-color: $color0;
+  color: $color6;
+}
+
+.active-workspace-button {
+  border: none;
+  color: $color6
+}
+
+.inactive-workspace-button {
+  border: none;
+  color: $color2;
+}
