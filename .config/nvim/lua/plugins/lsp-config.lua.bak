@@ -1,3 +1,4 @@
+-- Deprecated with nvim inbuilt lsp setup now.
 return {
     -- Mason that manages LSP servers installation
     {
