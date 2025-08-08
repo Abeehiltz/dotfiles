@@ -1,6 +1,8 @@
 -- Set <space> as leader key
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 -- Nerd font selection
 vim.g.have_nerd_font = true
+
+vim.g.hardtime_default_on = 1
