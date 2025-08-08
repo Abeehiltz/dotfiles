@@ -17,29 +17,30 @@
 
       # List packages installed in system profile. To search by name, run:
       # $ nix-env -qaP | grep wget
-      environment.systemPackages =
-        [ 
-          pkgs.vim
-          pkgs.eza
-          pkgs.fd
-          pkgs.kubernetes-helm
-          pkgs.lazygit
-          pkgs.zoxide
-          pkgs.lua-language-server
-          pkgs.neofetch
-          pkgs.zsh-powerlevel10k
-          pkgs.prettierd
-          pkgs.stylua
-          pkgs.talosctl
-          pkgs.typescript-language-server
-          pkgs.wget
-          pkgs.yaml-language-server
-          pkgs.yamllint
-          pkgs.zsh-autosuggestions
-          pkgs.zsh-syntax-highlighting
-          pkgs.kubectl
-          pkgs.kompose
-          pkgs._1password-gui
+      environment.systemPackages = with pkgs; [
+          vim
+          eza
+          fd
+          kubernetes-helm
+          lazygit
+          zoxide
+          lua-language-server
+          neofetch
+          zsh-powerlevel10k
+          prettierd
+          stylua
+          talosctl
+          typescript-language-server
+          wget
+          yaml-language-server
+          yamllint
+          zsh-autosuggestions
+          zsh-syntax-highlighting
+          kubectl
+          kompose
+          _1password-gui
+          obsidian
+          zsh
         ];
 
       fonts.packages = with pkgs; [
@@ -53,6 +54,7 @@
         brews = [
           "mas"
         ];
+
         casks = [
           "alfred"
           "appcleaner"
@@ -60,17 +62,21 @@
           "mos"
           "rectangle"
         ];
-         # look for id with mas search
+
+        # look for id with mas search
         masApps = {
-          "Noir" = 1592917505;
-          "Wireguard" = 1451685025;
-          "PL2303-Serial" = 1624835354;
-          "Pixelmator-Pro" = 1289583905;
-          "Things3" = 904280696;
+          "Noir"             = 1592917505;
+          "Wireguard"        = 1451685025;
+          "PL2303-Serial"    = 1624835354;
+          "Pixelmator-Pro"   = 1289583905;
+          "Things3"          = 904280696;
           "1Password-Safari" = 1569813296;
-          "Amphetamine" = 937984704;
+          "Amphetamine"      = 937984704;
         };
-        onActivation.cleanup = "zap";
+
+	onActivation.cleanup    = "zap";
+	onActivation.autoUpdate = true;
+        onActivation.upgrade    = true;
       };
 
       # Necessary for using flakes on this system.
@@ -89,6 +95,10 @@
 
       # The platform the configuration will be used on.
       nixpkgs.hostPlatform = "aarch64-darwin";
+
+      system.defaults = {
+        dock.autohide = true;
+      };
     };
   in
   {
@@ -96,6 +106,9 @@
     # $ darwin-rebuild build --flake .#BabeeMac
     darwinConfigurations."BabeeMac" = nix-darwin.lib.darwinSystem {
       modules = [ 
+        ({ config, ... }: {
+          homebrew.taps = builtins.attrNames config.nix-homebrew.taps;
+        }) 
         configuration 
         nix-homebrew.darwinModules.nix-homebrew
         {
